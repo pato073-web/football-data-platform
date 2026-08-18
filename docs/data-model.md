@@ -117,3 +117,25 @@ Represents a football match played within a specific season.
 - `season_id` references `Season.id`.
 - `home_team_id` references `Team.id`.
 - `away_team_id` references `Team.id`.
+
+## Entity Relationships
+
+- A Country can have many Competitions.
+- A Country can have many Teams.
+- A Country can have many Players.
+
+- A Competition belongs to a Country.
+- A Competition can have many Seasons.
+
+- A Season belongs to a Competition.
+- A Season can have many Teams through SeasonTeam.
+- A Season can have many Matches.
+
+- A Team belongs to a Country.
+- A Team can participate in many Seasons through SeasonTeam.
+
+- A Player belongs to a Country.
+- A Player can play for different Teams across different Seasons through PlayerSeasonTeam.
+
+- A Match belongs to a Season.
+- A Match has one home Team and one away Team.

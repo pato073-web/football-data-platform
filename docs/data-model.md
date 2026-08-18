@@ -1,34 +1,39 @@
 # Data Model
 
-This document describes the initial entities and relationships used by the Football Data Platform.
+This document describes the entities and relationships used by the Football Data Platform.
+
+## Country
+
+Represents a country.
+
+| Field | Type | Description |
+|---|---|---|
+| id | Integer | Unique identifier for the country |
+| name | String | Country name |
+| code | String | Unique country code |
 
 ## Competition
 
-- id
-- name
-- country
+Represents a football competition.
 
-## Team
+| Field | Type | Description |
+|---|---|---|
+| id | Integer | Unique identifier for the competition |
+| name | String | Official competition name |
+| country_id | Integer, Nullable | Country associated with the competition |
 
-- id
-- name
-- country
-- competition_id
+**Relationship:** `country_id` references `Country.id`.
 
-## Player
+## Season
 
-- id
-- name
-- nationality
-- birth_date
-- team_id
+Represents a specific edition or season of a competition.
 
-## Match
+| Field | Type | Description |
+|---|---|---|
+| id | Integer | Unique identifier for the season |
+| competition_id | Integer | Competition associated with the season |
+| name | String | Season name, for example 2025-26 |
+| start_date | Date | Start date of the season |
+| end_date | Date | End date of the season |
 
-- id
-- competition_id
-- home_team_id
-- away_team_id
-- match_date
-- home_score
-- away_score
+**Relationship:** `competition_id` references `Competition.id`.

@@ -50,3 +50,60 @@ The first version of the platform will focus on the core football data structure
 - Live scores
 - Frontend
 - Advanced statistics
+
+## Roadmap
+
+### Phase 1 — Project Foundation
+
+* [x] Define project purpose
+* [x] Define Version 1 scope
+* [x] Design initial data model
+* [x] Define entity relationships
+* [ ] Create local project structure
+* [ ] Configure Git repository locally
+
+### Phase 2 — Database
+
+* [ ] Install and configure PostgreSQL
+* [ ] Create database connection
+* [ ] Create database tables
+* [ ] Define foreign keys and constraints
+* [ ] Add initial sample data
+
+### Phase 3 — REST API
+
+* [ ] Set up FastAPI
+* [ ] Create Country endpoints
+* [ ] Create Competition endpoints
+* [ ] Create Season endpoints
+* [ ] Create Team endpoints
+* [ ] Create Player endpoints
+* [ ] Create Match endpoints
+* [ ] Add validation and error handling
+
+### Phase 4 — Real Football Data
+
+* [ ] Find a reliable football data source
+* [ ] Build data import scripts
+* [ ] Clean and transform incoming data
+* [ ] Import the 2025-26 season
+* [ ] Automate database updates
+
+### Phase 5 — Quality and Deployment
+
+* [ ] Add automated tests
+* [ ] Add Docker
+* [ ] Add environment variables
+* [ ] Add CI/CD with GitHub Actions
+* [ ] Deploy the API
+* [ ] Improve API documentation
+
+### Phase 6 — Future Features
+
+* [ ] Historical data from 2000 onward
+* [ ] Standings
+* [ ] Advanced team statistics
+* [ ] Player statistics
+* [ ] User accounts and authentication
+* [ ] Frontend dashboard
+* [ ] Predictive models

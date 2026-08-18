@@ -94,3 +94,26 @@ Represents a player's membership in a team during a specific season.
 
 - `player_id` references `Player.id`.
 - `season_team_id` references `SeasonTeam.id`.
+
+## Match
+
+Represents a football match played within a specific season.
+
+| Field | Type | Description |
+|---|---|---|
+| id | Integer | Unique identifier for the match |
+| season_id | Integer | Season associated with the match |
+| home_team_id | Integer | Home team |
+| away_team_id | Integer | Away team |
+| match_date | Date | Date of the match |
+| kickoff_time | Time, Nullable | Scheduled kickoff time |
+| home_score | Integer, Nullable | Goals scored by the home team |
+| away_score | Integer, Nullable | Goals scored by the away team |
+| status | String | Current status of the match |
+| round | String, Nullable | Matchday or competition round |
+
+**Relationships:**
+
+- `season_id` references `Season.id`.
+- `home_team_id` references `Team.id`.
+- `away_team_id` references `Team.id`.

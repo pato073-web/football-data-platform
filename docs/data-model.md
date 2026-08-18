@@ -37,3 +37,60 @@ Represents a specific edition or season of a competition.
 | end_date | Date | End date of the season |
 
 **Relationship:** `competition_id` references `Competition.id`.
+
+## Team
+
+Represents a football club or team.
+
+| Field | Type | Description |
+|---|---|---|
+| id | Integer | Unique identifier for the team |
+| name | String | Official team name |
+| country_id | Integer | Country associated with the team |
+
+**Relationship:** `country_id` references `Country.id`.
+
+## SeasonTeam
+
+Represents the participation of a team in a specific competition season.
+
+| Field | Type | Description |
+|---|---|---|
+| id | Integer | Unique identifier for the participation record |
+| season_id | Integer | Season in which the team participates |
+| team_id | Integer | Team participating in the season |
+
+**Relationships:**
+
+- `season_id` references `Season.id`.
+- `team_id` references `Team.id`.
+
+## Player
+
+Represents a football player.
+
+| Field | Type | Description |
+|---|---|---|
+| id | Integer | Unique identifier for the player |
+| name | String | Full name of the player |
+| country_id | Integer | Player nationality |
+| birth_date | Date | Player date of birth |
+
+**Relationship:** `country_id` references `Country.id`.
+
+## PlayerSeasonTeam
+
+Represents a player's membership in a team during a specific season.
+
+| Field | Type | Description |
+|---|---|---|
+| id | Integer | Unique identifier for the record |
+| player_id | Integer | Player associated with the record |
+| season_team_id | Integer | Team and season associated with the player |
+| start_date | Date | Date the player joined the team |
+| end_date | Date, Nullable | Date the player left the team |
+
+**Relationships:**
+
+- `player_id` references `Player.id`.
+- `season_team_id` references `SeasonTeam.id`.

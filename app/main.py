@@ -4,6 +4,9 @@ from app.routers.competition import router as competitions_router
 from app.routers.season import router as season_router
 from app.routers.team import router as team_router
 from app.routers.season_team import router as season_team_router
+from app.routers.player import router as player_router
+from app.routers.player_season_team import router as player_season_team_router
+from app.routers.match import router as match_router
 
 app = FastAPI(
     title = "Football Data Platform",
@@ -16,6 +19,9 @@ app.include_router(competitions_router)
 app.include_router(season_router)
 app.include_router(team_router)
 app.include_router(season_team_router)
+app.include_router(player_router)
+app.include_router(player_season_team_router)
+app.include_router(match_router)
 
 @app.get("/")
 def root():

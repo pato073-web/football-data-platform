@@ -6,7 +6,8 @@ from app.database import get_db
 from app.models.match import Match
 from app.models.season import Season
 from app.models.team import Team
-from app.schemas.match import MatchCreate, MatchResponse
+from app.models.season_team import SeasonTeam
+from app.schemas.match import MatchCreate, MatchResponse, MatchUpdate
 
 router = APIRouter(
     prefix="/matches",
@@ -55,6 +56,28 @@ def create_match(
             status_code=404,
             detail="Team not found"
         )
+    statement = select(SeasonTeam).where(
+        SeasonTeam.season_id == match_data.season_id,
+        SeasonTeam.team_id == match_data.home_team_id
+    )
+    home_season_team = db.scalar(statement)
+
+    if home_season_team is None:
+        raise HTTPException(
+            status_code=400,
+            detail="Home team is not registered in this season"
+        )
+    statement = select(SeasonTeam).where(
+        SeasonTeam.season_id == match_data.season_id,
+        SeasonTeam.team_id == match_data.away_team_id
+    )
+    away_season_team = db.scalar(statement)
+
+    if away_season_team is None:
+        raise HTTPException(
+            status_code=400,
+            detail="Away team is not registered in this season"
+        )
 
     if match_data.home_team_id == match_data.away_team_id:
         raise HTTPException(
@@ -78,4 +101,39 @@ def create_match(
     db.commit()
     db.refresh(match)
 
+    return match
+
+@router.put("/{match_id}", response_model=MatchResponse)
+def update_match(
+    match_id:int,
+    match_data:MatchUpdate,
+    db: Session = Depends(get_db)
+):
+    match = db.get(Match,match_id)
+    if match is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Match not found"
+        )
+    update_data = match_data.model_dump(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(match,field,value)
+
+    db.commit()
+    db.refresh(match)
+    return match
+
+@router.delete("/{match_id}", response_model=MatchResponse)
+def delete_match(
+    match_id: int,
+    db: Session = Depends(get_db)
+):
+    match = db.get(Match, match_id)
+    if match is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Match not found"
+        )
+    db.delete(match)
+    db.commit()
     return match

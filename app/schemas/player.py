@@ -16,3 +16,11 @@ class PlayerCreate(PlayerBase):
 
 class PlayerResponse(PlayerBase):
     id: int
+
+class PlayerUpdate(BaseModel):
+    model_config=ConfigDict(
+        extra="forbid"
+    )
+    country_id: int | None = None
+    name: str | None = None
+    birth_date: date | None = None

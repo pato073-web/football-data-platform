@@ -30,7 +30,7 @@ def get_season_teams(
     if seasonteam is None:
         raise HTTPException(
             status_code=404,
-            detail="Season-Team not found"
+            detail="SeasonTeam not found"
         )
     return seasonteam
 
@@ -66,4 +66,26 @@ def create_seasonteam(
             detail="Team is already registered in this season"
         )
 
+    return seasonteam
+
+@router.delete("/{season_team_id}", response_model=SeasonTeamResponse)
+def delete_season_team(
+    season_team_id:int,
+    db: Session=Depends(get_db)
+):
+    seasonteam = db.get(SeasonTeam,season_team_id)
+    if seasonteam is None:
+        raise HTTPException(
+            status_code=404,
+            detail="SeasonTeam not found"
+        )
+    try:
+        db.delete(seasonteam)
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(
+            status_code=409,
+            detail="SeasonTeam cannot be deleted because it is being used"
+        )
     return seasonteam

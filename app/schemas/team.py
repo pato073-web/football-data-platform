@@ -14,3 +14,10 @@ class TeamCreate(TeamBase):
 
 class TeamResponse(TeamBase):
     id: int
+
+class TeamUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid"
+    )
+    name: str | None = None
+    country_id: int | None = None

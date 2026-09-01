@@ -17,3 +17,11 @@ class PlayerSeasonTeamCreate(PlayerSeasonTeamBase):
 
 class PlayerSeasonTeamResponse(PlayerSeasonTeamBase):
     id: int
+
+class PlayerSeasonTeamUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid"
+    )
+
+    start_date: date | None = None
+    end_date: date | None = None

@@ -25,3 +25,12 @@ class SeasonCreate(SeasonBase):
 
 class SeasonResponse(SeasonBase):
     id: int
+
+class SeasonUpdate(BaseModel):
+    model_config=ConfigDict(
+        extra="forbid"
+    )
+    competition_id:int | None = None
+    name:str | None = None
+    start_date:date | None = None
+    end_date:date | None = None

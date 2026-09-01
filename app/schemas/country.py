@@ -17,3 +17,11 @@ class CountryCreate(CountryBase):
 
 class CountryResponse(CountryBase):
     id: int
+
+class CountryUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+
+    name: str | None = None
+    code: str | None = None

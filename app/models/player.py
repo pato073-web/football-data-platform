@@ -9,6 +9,11 @@ class Player(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
+    api_football_id: Mapped[int | None] = mapped_column(
+        unique=True,
+        nullable=True
+    )
+
     name: Mapped[str] = mapped_column(
         String(100), 
         nullable=False

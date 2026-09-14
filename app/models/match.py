@@ -17,6 +17,11 @@ class Match(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
+    api_football_id: Mapped[int | None] = mapped_column(
+        unique=True,
+        nullable=True
+    )
+
     season_id: Mapped[int] = mapped_column(
         ForeignKey("seasons.id"), # References the season associated with the match
         nullable=False

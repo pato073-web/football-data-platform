@@ -8,6 +8,11 @@ class Competition(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
+    api_football_id: Mapped[int | None] = mapped_column(
+        unique=True,
+        nullable=True
+    )
+
     name: Mapped[str] = mapped_column(
         String(150), 
         nullable=False
@@ -16,5 +21,3 @@ class Competition(Base):
         ForeignKey("countries.id"), # References the country associated with the competition
         nullable=True
     )
-
-
